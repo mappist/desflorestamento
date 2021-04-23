@@ -18,7 +18,7 @@
       <h2 class="project-tagline">{{ site.description }}</h2>
       {% include nav.html %}
    {% assign sorted_pages = site.pages | sort:"order" %}
-      {% for page in sorted_pages | remove:"index" %}
+      {% for page in sorted_pages %}
     <a href="{{ page.filename }}" class="btn">{{ page.title }}</a>
      {% endfor %}
     </header>
