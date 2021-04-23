@@ -11,4 +11,4 @@ This research explores relationships between these separate phenomena, searching
 
 <div class="flourish-embed flourish-map" data-src="visualisation/5929194"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
 
-**Next**: [Data](desflorestamento/data/)
+**Next**: [Data](/data/)
