@@ -1,7 +1,7 @@
 ---
 title: Data
 layout: template
-filename: data.md
+filename: data
 --- 
 
 # Data
