@@ -16,10 +16,11 @@
     <header class="page-header" role="banner">
       <h1 class="project-name">{{ site.title }}</h1>
       <h2 class="project-tagline">{{ site.description }}</h2>
-     {% assign sorted_pages = site.pages | sort:"order" %}
+      {% include nav.html nav=site.data.menu %}
+    <!--- {% assign sorted_pages = site.pages | sort:"order" %}
       {% for page in sorted_pages %}
     <a href="{{ page.filename }}" class="btn">{{ page.title }}</a>
-     {% endfor %}
+     {% endfor %} --->
     </header>
 
     <main id="content" class="main-content" role="main">
