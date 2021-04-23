@@ -1,37 +1,14 @@
-## Welcome to GitHub Pages
+## Introduction
 
-You can use the [editor on GitHub](https://github.com/mappist/desflorestamento/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Human existence in the 21st century requires a delicate balance between our *economic* needs --- agricultural land, resources for industry, infrastructure for human settlement, etc. --- and our *ecological* requirements --- maintaining forests, ameliorating climate change, and protecting other species, among others.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+With this balance in mind, it is possible to quantify specific changes on the face of the earth. This research focuses on deforestation in Brazil, vis-à-vis the Human Development Index (HDI) developed by the UN. According to the UN, Brazil alone accounts for roughly 12% of the world's forest. Over the last several decades, the Brazilian economy (as well as other signs of well-being) has boomed.
 
-### Markdown
+This research explores relationships between these separate phenomena, searching for spatial relationships. Consider, for example:
+ - Are the states of Brazil with the greatest deforestation also seeing the greatest economic growth?
+ - What is the relationship between deforestation and other indexes of human well-being, like health?
+ - Whatever form these relationships take, are they identical everywhere in the country, or do they vary by state or region?
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+<div class="flourish-embed flourish-map" data-src="visualisation/5929194"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/mappist/desflorestamento/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+**Next**: [Data](desflorestamento/data/)
