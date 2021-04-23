@@ -1,3 +1,9 @@
+---
+title: Introduction
+layout: template
+filename: index.md
+--- 
+
 ## Introduction
 
 Human existence in the 21st century requires a delicate balance between our *economic* needs --- agricultural land, resources for industry, infrastructure for human settlement, etc. --- and our *ecological* requirements --- maintaining forests, ameliorating climate change, and protecting other species, among others.
