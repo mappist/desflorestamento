@@ -1,7 +1,8 @@
 ---
 title: Background
 layout: template
-filename: 2-background
+order: 2
+filename: background
 ---
 
 # Background
