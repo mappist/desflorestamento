@@ -1,0 +1,294 @@
+---
+title: "Projects 2 & 3"
+author: "Caleb Winebrenner"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+  word_document: default
+---
+# Introduction
+
+Human existence in the 21st century requires a delicate balance between our *economic* needs --- agricultural land, resources for industry, infrastructure for human settlement, etc. --- and our *ecological* requirements --- maintaining forests, ameliorating climate change, and protecting other species, among others.
+
+With this balance in mind, it is possible to quantify specific changes on the face of the earth. This research focuses on deforestation in Brazil, vis-à-vis the Human Development Index (HDI) developed by the UN. According to the UN, Brazil alone accounts for roughly 12% of the world's forest. Over the last several decades, the Brazilian economy (as well as other signs of well-being) has boomed.
+
+This research explores relationships between these separate phenomena, searching for spatial relationships. Consider, for example:
+ - Are the states of Brazil with the greatest deforestation also seeing the greatest economic growth?
+ - What is the relationship between deforestation and other indexes of human well-being, like health?
+ - Whatever form these relationships take, are they identical everywhere in the country, or do they vary by state or region?
+
+## Data Sources
+
+| Description | Variable  | Data Source  |
+| ----------- | ------------ | ------------------- |
+| Forest Land   | Hectares of land used  | UN[^1]  |
+| Land use in Brazil | Deforestation / land use change | MapBiomas[^2] |
+| HDI by state       | economic wellbeing   | Global Data Lab[^3] |
+
+[^1]: Datasets from theUNare found at http://data.un.org/Default.aspx These data are in .csv format and report the hectares of land devoted to a particular use.
+
+[^2]: The Brazilian Annual Land Use and Land Cover Mapping Project, commonly known as MapBiomas, is a collective project of conservationists and GIS analysts in Brazil interested in gathering data on land use (especially forests) and mapping those changes over time. Data is made available for further analysis. The English-language statistics page can be found here:https://mapbiomas.org/en/estatisticas?cama_set_language=en
+
+[^3]: The Global Data Lab (https://globaldatalab.org) is a project of the Institute for Management Research at Radboud University in the Netherlands. Their datasets include measures of HDI at sub-national levels.
+
+### `R` Libraries:
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+# The following libraries are used in this project.
+library(sp)
+library(rgdal)
+library(ggplot2)
+library(GISTools)
+library(spdep)
+library(spatialreg)
+library(RColorBrewer)
+library(geobr) #this package loads spatial data from official sources in Brazil
+library(sf)
+library(dplyr)
+```
+
+# Project 2
+## EDA
+For my Exploratory Data Analysis (EDA) I began with a simple question: if I plot the data on thehectares of forested land, what happens over time? Likewise, what is happening over time to the.HDIin Brazil during the same period? (Spatial patterns in these questions will emerge later).
+```{r}
+# Plotting the loss of forests in Brazil over time
+brfor <- read.csv(file = "data/br_for.csv", header = TRUE,
+                  sep = ",", dec = ".", check.names = FALSE)
+plot(brfor)
+lines(brfor, col="red", lwd=3)
+title(main = "Hectares of Forested Land in Brazil")
+```
+
+```{r}
+nathdi <- read.csv(file = "data/brhdi.csv", header = TRUE,
+                   sep = ",", dec = ".", check.names = FALSE)
+plot(nathdi)
+lines(nathdi, lwd=3, col="blue")
+title(main="Human Development Index in Brazil")
+```
+
+Before moving on, it is critical that these data plots be understood correctly. The *x*-axis on the forest plot represents *five million hectares* with each tick mark (50,000 km$^2$). Each tick mark for HDI represents only an increase of 1% (that is, the HDI scale is 0 to 1). This would mean that for every 1% increase in HDI, there is a 1% change over time in forest loss. The relationship is likely not quite so straightforward, and varies from state to state and region to region in Brazil. This is where looking at this data on a by-state scale (rather than nationally) can be fruitful.
+
+From this point forward, I focused on two years, 2008 and 2018. In many cases, 2018 data was some of the most recently available. 2008 data was also closer to when I lived in Brazil.
+
+## Summary Statistics
+Then the 2008 data can be summarized. First, summary statistics of the hectares of forested land:
+```{r}
+# The following data frame is for the 2008 data
+df08 <- read.table(file = "data/2008-Data.csv", header = TRUE,
+                   sep = ",", dec = ".", check.names = FALSE,
+                   colClasses = c(`Percent-2008` = "numeric"))
+summary(df08$`Forest-2008`)
+```
+Then, a summary of the percentages of forested land by state (this also serves as a way of normalizing the data):
+```{r}
+summary(df08$`Percent-2008`)
+```
+
+Finally, summary statistics for HDI:
+```{r}
+summary(df08$`HDI-2008`)
+summary(df08$Health)
+summary(df08$Income)
+summary(df08$Education)
+```
+Now we can begin to examine the data for correlations. Note that HDI serves as the aggregate value for health, income, and education.
+```{r}
+cor( df08$`Percent-2008`, df08$`HDI-2008`)
+```
+
+This shows a negative correlation. This means that when the percentage of forested landcover is higher, generally the HDI is lower. But, this is a weak correlation, only about 20.5%. What about a possible correlation with income?
+
+```{r}
+cor( df08$`Percent-2008`, df08$`Income`)
+```
+This is a much stronger correlation, about 48%.
+
+Now, the same explorations will be done for data that is 10 years older. As before, we will summarize the hectares of forested land, the percentage of forest cover, and the HDI.
+
+```{r}
+# The following data frame is for the 2018 data
+df18 <- read.table(file = "data/2018-Data.csv", header = TRUE,
+                   sep = ",", dec = ".", check.names = FALSE, 
+                   colClasses = c(`Percent-2018` = "numeric"))
+summary(df18$`Forest-2018`)
+```
+Note that the mean dropped by roughly 250,000 hectares of forest.
+```{r}
+summary(df18$`Percent-2018`)
+```
+Note that the mean percentage of forest dropped by roughly 1%. The maximum decreased by 0.68%. Given that forest loss has been steady over the years, the question now becomes, has HDI increased significantly?
+
+```{r}
+summary(df18$`HDI-2018`)
+summary(df18$`Health`)
+summary(df18$Income)
+summary(df18$Education)
+```
+The mean HDI has, in fact, increased by approximately 5%. Mean health index has grown 6%, and education has grown roughly 8%. Income, however, has stayed approximately equal. Income staying the same is interesting, in part because ownership and use of the land (such as for agricultural production) is usually seen as the driver of clear-cutting the forests.
+```{r}
+cor(df18$`Percent-2018`, df18$`HDI-2018`)
+```
+The correlation shows that while the correlation is still weak, over time it has increased.
+
+## Visualizations
+
+```{r}
+plot(df18$`HDI-2018`, df18$`Percent-2018`,cex=1, pch=3,
+     xlab="HDI", ylab="Forest Cover Percentage",
+     main="Association Between HDI and Forest Cover")
+```
+The scatter plot does not seem to show any trends. However, a histogram might.
+```{r}
+hist(df18$`Percent-2018`, freq=TRUE, main = "Histogram",
+     xlab="Percent Forest Cover")
+```
+
+This histogram shows that most states in Brazil have less than 20% forest cover. Four of them, however, show a forest cover of more than 80%. (This is where spatial analysis can prove to be more fruitful, later.)
+
+## Standard Linear Regression
+
+First, however, let's run a standard linear regression. At first, the plan was to use HDI as the response variable to forest changes, like so:
+```{r}
+m1 = lm(`HDI-2018` ~ `Percent-2018`, data = df18)
+summary(m1)
+```
+This model *clearly* doesn't show much. Still, my intuition -- especially knowing the current political and ecological trends in Brazil -- was that some sort of relationship existed. I then tried flipping the variables, so that the forest cover was the *response* to changes in the HDI. I also disaggregated the variables.
+```{r}
+head(df18)
+ m2a = lm(`Percent-2018` ~`Health` + `Income` + `Education`, data = df18)
+summary(m2a)
+```
+At Dr. Wu's guidance, I omitted education, as a variable that is not statistically significant.
+```{r}
+## Taking out education
+bettermodel = lm(`Percent-2018` ~`Health` + `Income`, data = df18)
+summary(bettermodel)
+```
+
+I also wanted to see a standard linear regression on these variables for the other year in my data. As before, education is not statistically significant:
+```{r}
+head(df08)
+ m2b = lm(`Percent-2008`~`Health` + `Income` + `Education`, data = df08)
+summary(m2b)
+```
+Note that over time, the R-squared decreases ever so slightly.
+
+These discoveries -- especially the use of the forest percentage as the response variable -- make spatial analysis of these data a good choice.
+
+## Exploratory Spatial Data Analysis
+
+For spatial data analysis, the process began with using spatial data from the `geobr` package. Note that there is the input `simplified = FALSE`, as per the package documentation this means that polygon boundaries are not simplified or smoothed, making it more accurate for spatial analysis.
+```{r}
+library(geobr)
+map = read_state(code_state = "all", year = 2018,
+                 simplified = FALSE, showProgress = FALSE)
+# Then the map had to be converted the the correct kind of spatial object:
+map.sp <- as(map,Class = "Spatial")
+```
+
+The map of the Brazilian states allows for the creation of a spatial weights matrix:
+```{r}
+matrix <- poly2nb(map.sp, queen = TRUE)
+matrix
+```
+This matrix could then be plotted:
+```{r}
+## This plot did not work as of Apr 13
+plot(map.sp, border = "grey")
+plot(matrix, coordinates(map_sp), add=TRUE, col="blue")
+
+```
+
+### Moran's *I*
+First, I am testing for spatial autocorrelation in my variables, and then again in the residuals of the model.
+
+```{r}
+lw <-nb2listw(matrix, style = "B")
+IP <- df18$`Percent-2018`
+moran.test(IP, listw=lw, randomisation = FALSE)
+```
+```{r}
+moran.plot(IP, listw = nb2listw(matrix, zero.policy = TRUE, style = "C"))
+```
+```{r}
+lm.morantest(bettermodel, lw, zero.policy = TRUE, alternative = "two.sided")
+```
+### Model Analysis
+
+Let's analyze the model to see what works, and then see if spatial models do a better job:
+
+```{r}
+summary(bettermodel) # the model of 2018 data, with the forest as the response variable
+```
+
+```{r}
+model_aic = step(bettermodel)
+summary(model_aic)
+n <- nrow(df18) #n is the sample size
+model_bic <- step(bettermodel, k=log(n))
+```
+Here we can also analyze the residuals:
+```{r message=TRUE}
+plot(bettermodel)
+par(mfrow=c(1,2))
+plot(bettermodel, which=c(1,2), cex=0.1) #plot residual vs fitted and normal QQ plots
+```
+
+# Project 3
+## Spatial Regression Models
+
+The item `matrix` above -- indicating neighbor relations -- can also be operationalized into a weights matrix for spatial analysis.
+```{r}
+listw_brW <- nb2listw(matrix, style = "W", zero.policy = TRUE)
+listw_brB <- nb2listw(matrix, style = "B", zero.policy = TRUE)
+```
+
+A spatial lag model can then be run as well:
+
+```{r}
+model_lag <- lagsarlm(`Percent-2018`~`Health` + `Income`, data = df18, listw = listw_brW, type = "lag", zero.policy = TRUE)
+summary(model_lag, correlation=FALSE)
+```
+```{r}
+plot(model_lag$fitted.values, model_lag$residuals, xlab="fitted values", ylab="Residuals", main ="Residuals vs Fitted", cex=0.1)
+abline(h=0, lty=2)
+```
+```{r}
+bptest.sarlm(model_lag)
+```
+
+A spatial error model can also be run:
+```{r}
+model_err = errorsarlm(formula = `Percent-2018`~`Health` + `Income`, data = df18, listw = listw_brW, zero.policy = TRUE)
+summary(model_err)
+```
+
+```{r}
+plot(model_err$fitted.values, model_lag$residuals, xlab="fitted values", ylab="Residuals", main ="Residuals vs Fitted", cex=0.1)
+abline(h=0, lty=2)
+```
+
+```{r}
+#testing residuals, standard procedure to test SEM
+moran.mc(residuals(model_err), listw_brW, zero.policy = TRUE, nsim=999)
+```
+These spatial models only do slightly better than a typical linear model. Given the low Moran's *I* scores as well, other models are likely a better choice -- something I explore in the next section.
+
+In short, it looks like while there is some kind of *relationship* between my variables, the fact that more than 30% of the model results remain unaccounted for, and the low spatial autocorrelation, means that likely some variable is missing, or there needs to be another way to look at the data at hand.
+
+## Reflection, Results, & Further Study
+
+I am grateful for the extra time Dr. Wu gave me for this project. While I was reasonably pleased with the scholarship I found (outlined both in Project 1 and here) as well as the data (especially the data from the UN and MapBiomas), my knowledge both of statstics and of coding in `R` leave much to be desired. Thankfully, I have learned a great deal through this work.
+
+On an even more granular level, the spreadsheets I found were messy and often took a great deal of time to reorganize, sort, and scrub with no guarantee that they would work. Some data were in hectares and others in kilometers; some in English but the majority in Portuguese.[^4]
+
+Additionally, I see remote sensing data as being immanently useful for a project of this nature, but it wasn't something I was able to fully incorporate. If possible, continuing my inquiries on deforestation and urban growth using satellite imagery of target cities (say, Rio de Janeiro, Bahía, and São Paulo) could be a focus of future versions of this project. It’s one thing to be able to say “there’s a complex relationship between income, health, and forests;” it’s another thing to visualize it thoroughly as proof.
+
+That said, several practical next steps remain for the immediate next iteration of the project. First, there is the issue of variables. For the next project, it is my hope to convert the various data on forest cover into a form of "percent change," likely using 2013 as an intermediate year. It seems necessary that I view deforestation through other variables; percentage of forest cover alone was not sufficient.
+
+Second, there is the question of demonstrating a spatial relationship in the data in a quanitatively rigorous way. For this, I am preparing the code and data in order to run a geographically-weighted regression. GWR, as a kernel function, may reveal patterns on the map that are not yet visible in the numbers.
+
+Thirdly, there is the question of new information. During my research for this project, I made some discoveries about legislation passed in Brazil affecting the status of the Amazon and the economic incentiives for deforestation. I also discovered emerging research on the mangrove forests in Brazil, which thus far are ommitted here. While exploring both is beyond my current scope, both of these may serve as additional variables for future regressions.
+
+[^4]: I am fluent in Portuguese, but this nevertheless contributed to the cognitive load of the project working in my second language.
