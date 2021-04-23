@@ -1,3 +1,9 @@
+---
+title: Data
+layout: template
+filename: data.md
+--- 
+
 # Data
 
 | Description | Variable  | Data Source  |
