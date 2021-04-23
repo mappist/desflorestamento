@@ -1,7 +1,7 @@
 ---
 title: Introduction
 layout: template
-filename: index.md
+filename: index
 --- 
 
 ## Introduction
