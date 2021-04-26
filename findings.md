@@ -13,12 +13,14 @@ First, it was possible to map the changes in HDI over time. While not yet quanti
 
 **My hypothesis was that the increase in HDI would lead to a loss of forests (i.e., not the other way around) because the policies currently in place encouraged forests to be cut in the name of economic growth.**
 
-Correlation measures showed that indeed, forest loss was associated with HDI. I had better success when I disaggregated the data into its three component variables: health, education, and income.
+Correlation measures showed that indeed, forest loss was associated with HDI. I had better success when I disaggregated the HDI data into its three component variables: health, education, and income.
 
 Interestingly, in an OLS regression, education was not statistically significant. The same held true for SEM and SLM. However, in a GWR, not only was education statistically significant, but health was not.
 
-**This supported my second hypothesis, that the relationship I was seeing was a function of urban growth more generally.**
+**This supported an emerging second hypothesis, that the relationship I was seeing was a function of urban growth more generally.**
 
-The deep forests, such as in the north of Brazil, are not disappearing as quickly as southern forests. However, the south of Brazil is also more urban, more developed, and more educated. Of note, tha majority of recognized Indigenous groups also live in the north and northwest of Brazil.
+The deep forests, such as in the north of Brazil, are not disappearing as quickly as southern forests. However, the south of Brazil is also more urban, more developed, and more educated. Of note, tha majority of recognized Indigenous groups also live in the north and northwest of Brazil. My first map of the GWR, showing the *t*-statistic for Income as a model variable, shows that this model sees this division well, while also showing that in the northern parts of Brazil, more economic growth meant more forest loss.
 
 <div class="flourish-embed" data-src="story/840819"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
+
+Nevertheless, more examination seems worthwhile. See [Further Study](next).
