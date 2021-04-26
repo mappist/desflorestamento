@@ -25,4 +25,6 @@ Sanchez-Azofeifa, A., J. Antonio Guzmán, C. A. Campos, S. Castro, V. Garcia-Mil
 
 Seagrasses and mangroves can suck carbon from the air. 2021. The Economist. https://www.economist.com/science-and-technology/2021/03/06/seagrasses-and-mangroves-can-suck-carbon-from-the-air.
 
+Sletto, B., A. W. B. de Almeida, J. Bryan, and C. R. Hale eds. 2020. Radical cartographies: participatory mapmaking from Latin America First edition. Austin: University of Texas Press.
+
 Tufte, E. R. 1974. *Data Analysis for politics and policy*. Englewood Cliffs, N.J: Prentice-Hall.
