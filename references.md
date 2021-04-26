@@ -15,6 +15,8 @@ Delgado-Aguilar, Ma. J., L. Hinojosa, and C. B. Schmitt. 2019. Combining remote 
 
 Hsu, W.-T., and X. Zou. 2019. Central Place Theory and the Power Law for Cities. In *The Mathematics of Urban Morphology, Modeling and Simulation in Science, Engineering and Technology*., ed. L. D’Acci, 55–75. Cham: Springer International Publishing http://link.springer.com/10.1007/978-3-030-12381-9_3 (last accessed 2 February 2021).
 
+Martínez-García, M. P., and J. R. Morales. 2019. Resource effect in the Core–Periphery model. *Spatial Economic Analysis* 14 (3):339–360.
+
 Pred, A. 1984. Place as Historically Contingent Process: Structuration and the Time-Geography of Becoming Places. *Annals of the Association of American Geographers* 74 (2):279–297.
 
 Roos, A., J. Eggers, C. Mark-Herbert, and A. Lindhagen. 2018. Using von Thünen rings and service-dominant logic in balancing forest ecosystem services. *Land Use Policy* 79:622–632.
