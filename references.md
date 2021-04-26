@@ -1,7 +1,7 @@
 ---
 title: References
 layout: template
-order: 5
+order: 7
 filename: references
 ---
 
