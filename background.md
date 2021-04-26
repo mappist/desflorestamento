@@ -13,7 +13,7 @@ Specifically, the forests of Brazil compose roughly 12% of the world's forest co
 
 Since I lived in Brazil previously and I remember the forests well, this issue is of concern to me both as a resident of earth and as someone with a connection to Brazil. Over the last decade, I have grown increasingly concerned over the policies of the Brazilian government regarding the rainforest.[^2] For example, the Brazilian constitution asserts that the first step twoard claiming land for any kind of development is to clear it -- in practice, allowing for forests to be cut while there is still debate over what to do with a parcel of land (and who has the authority to manage it).
 
-Two major aspects of this seem to get international attention: the rowth of the Brazilian economy and the loss of forests. In plainest terms, I'm asking, *how are these related?*
+Two major aspects of this seem to get international attention: the growth of the Brazilian economy and the loss of forests. In plainest terms, I'm asking, *how are these related?*
 
 ## "Space" vs "Place"
 
