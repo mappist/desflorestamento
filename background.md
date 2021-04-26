@@ -15,6 +15,17 @@ Since I lived in Brazil previously and I remember the forests well, this issue i
 
 Two major aspects of this seem to get international attention: the rowth of the Brazilian economy and the loss of forests. In plainest terms, I'm asking, *how are these related?*
 
+## "Space" vs "Place"
+
+Pred (1984) asserts that the shift of a "space" to a "place" is as the result of structuration processes. Moreover, this process is contingent on various histories of a place and how those histories are understood. For example, in Brazil indigenous history in relationship to the forests is not considered part of the official narrative and creates friction between logging companies or farmers and Indigenous leaders. Given the views of the Brazilian government, Pred's notion of "structuration" also applies to the clearing of land, asserting a human presence in a place.
+
+## Ecosystem Services
+
+Roos et al (2018) have applied Von Thünen's model to renewable land use with ecosystem services. Their analysis primarily focuses on services like ecotourism (which is popluar in Brazil, such as with the Tijuca Forest in the northern district of Rio de Janeiro). Martínez-García and Morales (2019) have also considered the application of ecosystem services and renewable resources to the Core-Periphery Model.
+
+While both frameworks did not prove directly relevant to the current iteration of my project, they do demonstrate ways in which econometyric models can better consider ecological questions. In this way, they are also worthy of later consideration as patterns in the data emerge.
+
+
 **Next**: [Data](data)
 
 [^1]: Additionally, the word *econometrics* adds the word for "measure," μέτρον.
