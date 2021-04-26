@@ -28,5 +28,7 @@ While both frameworks did not prove directly relevant to the current iteration o
 
 **Next**: [Data](data)
 
+---
+
 [^1]: Additionally, the word *econometrics* adds the word for "measure," μέτρον.
 [^2]: While beyond my scope here, I plan on exploring the politics and polcy of Brazil and its forests in a further report.
