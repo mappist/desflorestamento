@@ -23,7 +23,7 @@ Other studies of land use and forest degredqation have considered remote sensing
 
 For the sake of scope, my study only relied on forests from the Amazon and the Mata Atlântica (Atlantic Forest) in Brazil. However, other biomes -- for example, the mangrove forests along the coast and the caatinga (high mountain savannahs) are also experiencing ecological canges. These biomes could be considered as addtional variables, especially for provinces that are further from the primary forests I considered. Of note, a new report has demonstrated that seagrasses and mangroves are actually a more efficient carbon sink than forests (The Economist, 2021). As with other research here, there is a potential for policy changes based on the relationships explored.
 
-As a corrollary, there is also a question of considering the forests I did study, but using a different variable -- such as accumulated forest loss. Future regressions will consdider this, at least when testing for the best possible model.
+As a corrollary, there is also a question of considering the forests I did study, but using a different variable -- such as **accumulated hectares forest loss** or (requiring more data preparation) a **percentage of forest loss** (rather than forest cover). Future regressions will consdider this, at least when testing for the best possible model.
 
 ## A Question of Scale
 
