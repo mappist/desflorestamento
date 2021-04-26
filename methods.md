@@ -9,6 +9,6 @@ filename: methods
 
 The first methods employed were exploratory.
 
+<div class="flourish-embed" data-src="story/837076"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
 
-
-<div class="flourish-embed flourish-map" data-src="visualisation/5939371"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
+After initial plots were made, regression analyses were run. Spatial models (SLM and SEM) did not fit better than a non-spatial OLS regression. However, geographically-weighted regression (GWR) shows some promise, at least fitting better than OLS.
