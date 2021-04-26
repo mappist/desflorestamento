@@ -11,6 +11,6 @@ The word *economy* comes originally from the Greek *οἰκονομία*, meanin
 
 Specifically, the forests of Brazil compose roughly 12% of the world's forest cover. Perhaps more important, those forests -- the Amazon being the best known -- provide the most important carbon sink on earth (helping to naturally control the amound of carbon dixoide and other greenhouse gasses in the atmosphere. In a word, Brazilian forests are *critical* for human well-being in the long term.
 
-Nevertheless, the Brazilian government considers logging and agriculture to be key economic activities, even going so far as to consider clearing the land to be the first step for any kind of land ownership. In other words, cutting forests is incentivized in the name of economic growth. Additionally, the Human Development Index (an aggregate measure of income, healthcare, and
+Nevertheless,
 
 [^1]: Additionally, the word *econometrics* adds the word for "measure," μέτρον.
