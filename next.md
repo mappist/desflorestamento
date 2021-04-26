@@ -13,7 +13,7 @@ Despite spending the majority of a semester on this project, it seems I have mor
 
 New research is demonstrating that forest ecosystems under the stewardship of indigenous peoples fare better. Even so, recognition of indigenous rights in Brazil is an ongoing issue (Cannon, 2021). Moreover, there is precedent that indigenous, local knowledge can be a valuable way of providing ecosystem services (Delgado-Aguilar et al., 2019; Saarikoski et al., 2017). Additionally, the growing movement for participatory GIS and participatory mapmaking has opened up more opportunities for indigenous peoples to be involved in ecological and economic policies (Sletto et al, 2020).
 
-As applied to this research, a variable could be used to consider how much of a given state or municipality's land is under indigenous stewardship, or at least recognized as indigenous. As a corrollary, there could also be a variable for the area desginated by the Brazilian government as the "Legal Amazon."
+As applied to this research, a variable could be used to consider how much of a given state or municipality's land is under indigenous stewardship, or at least recognized as indigenous. As a corrollary, there could also be a variable for the area desginated by the Brazilian government as the "**Legal Amazon**," on the grounds that the legal status of large stretches of forest may play a role in explaining the patterns seen.
 
 ## Remote Sensing
 
