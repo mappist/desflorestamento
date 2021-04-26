@@ -1,8 +1,8 @@
 ---
-title:
-layout:
-order:
-filename:
+title: References
+layout: template
+order: 5
+filename: references
 ---
 
 # References
