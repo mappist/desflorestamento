@@ -1,0 +1,139 @@
+**Note: Some of the blocks of `R` code here are copied from earlier reports, in order to run additional analyses.**
+
+# Introduction
+
+# Data
+
+```{r}
+df08 <- read.table(file = "2008-Data.csv", header = TRUE,
+                    sep = ",", dec = ".", check.names = FALSE,
+                    colClasses = c(`Percent-2008` = "numeric"))
+df18 <- read.table(file = "2018-Data.csv", header = TRUE,
+                   sep = ",", dec = ".", check.names = FALSE, 
+                   colClasses = c(`Percent-2018` = "numeric"))
+```
+
+# Methods
+## EDA
+
+```{r}
+hist(log(df18$`Percent-2018`))
+m1 = lm(`HDI-2018` ~ log(`Percent-2018`), data = df18)
+summary(m1)
+```
+
+## ESDA
+
+```{r}
+brspatial <- readOGR(dsn = "data", layer="bra_admbnda_adm1_ibge_2020")
+matrix <- poly2nb(brspatial, queen = TRUE)
+head(brspatial)
+```
+
+```{r}
+plot(brspatial, border = "grey")
+plot(matrix, coordinates(brspatial), add=TRUE, col="blue")
+```
+
+## OLS & GWR
+
+```{r}
+library(sf)
+library(tmap)
+library(spgwr)
+```
+
+Given that any spatial relationships are proving hard to see, I decided to attempt other methods. Specifically, I ran an OLS regression and then GWR.
+
+```{r}
+fit.ols.08<-lm(`Percent-2008`~`Health` + `Income` + `Education`, data = df08)
+summary(fit.ols.08)
+```
+As before, education does not seem to be statistically significant, and will be discarded as a variable.
+
+Now the same process, for the 2018 data:
+```{r}
+fit.ols.18<-lm(`Percent-2018`~`Health` + `Income` + `Education`, data = df18)
+summary(fit.ols.18)
+```
+
+```{r}
+gwr.b1<-gwr.sel(df18$`Percent-2018` ~ df18$Health + df18$Income, brspatial)
+gwr.b1
+```
+And now a GWR, with the bandwidth determined by the data.
+```{r}
+gwr.fit1<-gwr(df18$`Percent-2018` ~ df18$Health + df18$Income + df18$Education, data = brspatial, bandwidth = gwr.b1, se.fit=T, hatmatrix=T)
+gwr.fit1
+```
+In order to find a best model fit, I am also going to experiment with different bandwidths and weighting schemes.
+```{r}
+gwr.b2<-gwr.sel(df18$`Percent-2018` ~ df18$Health + df18$Income + df18$Education, data=brspatial, gweight = gwr.bisquare)
+gwr.b2
+```
+With the new bandwidth, I'll try a second model:
+```{r}
+gwr.fit2<-gwr(df18$`Percent-2018` ~ df18$Health + df18$Income + df18$Education, data = brspatial, bandwidth = gwr.b2, gweight = gwr.bisquare, se.fit=T, hatmatrix=T)
+gwr.fit2
+```
+
+Since I want to find the best results, I will now try an adaptive kernel.
+```{r}
+gwr.b3<-gwr.sel(df18$`Percent-2018` ~ df18$Health + df18$Income, data=brspatial, adapt = TRUE)
+gwr.b3
+gwr.fit3<-gwr(df18$`Percent-2018` ~ df18$Health + df18$Income, data = brspatial, adapt=gwr.b3, se.fit=T, hatmatrix=T)
+gwr.fit3
+```
+First, examining the GWR models, the seocnd model is the best, with an AIC of 195 and an R^2 of 93%. This model is what I will use!
+
+Then several tests can be run in order to show that GWR is a better fit than OLS:
+```{r}
+BFC02.gwr.test(gwr.fit2)
+
+BFC99.gwr.test(gwr.fit2)
+```
+The F3 test then allws us to examine which coefficents show spatial heterogeneity:
+```{r}
+LMZ.F3GWR.test(gwr.fit2)
+```
+This shows that for GWR, income and education are statistically significant in the coefficients.
+
+```{r}
+round(cor(as.data.frame(gwr.fit2$SDF[,2:11]), use ="complete.obs"),2)
+```
+Now, let's map the results
+
+```{r}
+names(gwr.fit2$SDF)
+dfree<-gwr.fit2$results$edf
+```
+```{r}
+## Calculating the t-stat for Income:
+brspatial$Income.t <- gwr.fit2$SDF$df18.Income/gwr.fit2$SDF$df18.Income_se
+brspatial$Income.t.p<-2*pt(-abs(brspatial$Income.t), dfree)
+## Now, mapping the t-statistic:
+breaks <- c(0,0.01,0.05,0.1,1)
+
+tm_shape(brspatial, unit = "meter") +
+  tm_polygons(col = "Income.t.p",palette = "Reds", breaks = breaks,
+              border.alpha = 0, title = "") +
+  tm_scale_bar(breaks = c(0, 1, 2), size = 1, position = c("right", "bottom")) +
+  tm_compass(type = "4star", position = c("left", "bottom")) + 
+  tm_layout(main.title = "p-value of the T-test on Income",  main.title.size = 0.95, frame = FALSE, legend.outside = TRUE)
+```
+
+```{r}
+## Calculating the t-stat for Education:
+brspatial$Education.t <- gwr.fit2$SDF$df18.Education/gwr.fit2$SDF$df18.Education_se
+brspatial$Education.t.p<-2*pt(-abs(brspatial$Education.t), dfree)
+## Now, mapping the t-statistic:
+breaks <- c(0,0.01,0.05,0.1,1)
+
+tm_shape(brspatial, unit = "meter") +
+  tm_polygons(col = "Income.t.p",palette = "Reds", breaks = breaks,
+              border.alpha = 0, title = "") +
+  tm_scale_bar(breaks = c(0, 1, 2), size = 1, position = c("right", "bottom")) +
+  tm_compass(type = "4star", position = c("left", "bottom")) + 
+  tm_layout(main.title = "t-stat",  main.title.size = 0.95, frame = FALSE, legend.outside = TRUE)
+```
+
