@@ -22,7 +22,7 @@ The data from MapBiomas were more complicated. The project tracks numerous land 
 
 ---
 
-[^1]: Datasets from the UN are found at http://data.un.org/Default.aspx These data are in `.csv` format. Forest data report the hectares of land devoted to a particular use in a given year. HDI data reports the aggregate HDI for a given country for each year.
+[^1]: Datasets from the UN are found [here](http://data.un.org/Default.aspx). These data are in `.csv` format. Forest data report the hectares of land devoted to a particular use in a given year. HDI data reports the aggregate HDI for a given country for each year.
 
 [^2]: The Brazilian Annual Land Use and Land Cover Mapping Project, commonly known as MapBiomas, is a collective project of conservationists and GIS analysts in Brazil interested in gathering data on land use (especially forests) and mapping those changes over time. Data is made available for further analysis. The English-language statistics page can be [found here](https://mapbiomas.org/en/estatisticas?cama_set_language=en)
 
