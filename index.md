@@ -1,7 +1,7 @@
 ---
 title: Introduction
 layout: template
-order: 1
+order: 0
 filename: index
 --- 
 
