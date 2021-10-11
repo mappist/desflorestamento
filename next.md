@@ -7,7 +7,7 @@ filename: next
 
 # Further Study
 
-Despite spending the majority of a semester on this project, it seems I have more questions than answers. In particular, three ideas emerge as potential places for aditional research (some of which I hope to include in my extra-credit written report): Indigenous lands, the use of remote sensing technologies, and the effects of other biomes on HDI. Additionally, this study may benefit from using a different scale.
+Despite spending the majority of a semester on this project, it seems I have more questions than answers. In particular, three ideas emerge as potential places for aditional research (some of which I include in the [Policy Report](policy-report)): Indigenous lands, the use of remote sensing technologies, and the effects of other biomes on HDI. Additionally, this study may benefit from using a different scale.
 
 ## Indigenous Lands
 
