@@ -20,6 +20,8 @@ The data from the UN was a simple CSV, but only available at the national level.
 
 The data from MapBiomas were more complicated. The project tracks numerous land changes and, as such, this required that I make some critical choices in order to limit the scope of my project, such as eliminating mangrove forests from consideration (see [Further Study](next)). Additionally, the data required extensive scrubbing in order to be used effectively. For the purposes of this study, I forcused on the percent of forest cover per state. However, I am also working on using accumulated hectares of forest loss as a possible variable in a future iteration of this work.
 
+**Next**: [Methods](methods)
+
 ---
 
 [^1]: Datasets from the UN are found [here](http://data.un.org/Default.aspx). These data are in `.csv` format. Forest data report the hectares of land devoted to a particular use in a given year. HDI data reports the aggregate HDI for a given country for each year.
