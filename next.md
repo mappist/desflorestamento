@@ -28,3 +28,6 @@ As a corrollary, there is also a question of considering the forests I did study
 ## A Question of Scale
 
 Every geographer must consider questions of scale. For this project, I used the 26 states of Brazil, plus the Federal District (analogous to Washington, DC in the US). However, each state subdivides into municipalities (analogous to counties). Especially if other ecological factors are considered, analyzing some of the data at a finer scale may demonstrate something in the data not yet visible.
+
+**Next**: [Policy Report](policy-report)
+
