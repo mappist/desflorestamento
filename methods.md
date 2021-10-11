@@ -7,7 +7,7 @@ filename: methods
 
 # Methods
 
-The initial methods employed were exploratory. First, I plotted the changes over time for both the national forest cover (in hectartes) and the national HDI (these data came from the UN). As you can see, forests are steadily decreasing while HDI is steadily increasing. Once I calculated the percentage of forest cover per state (by using numbers from MapBiomas), I was also able to plot a histogram of forest cover. This shows that the majority of states are less forested but a few are incredibly forested. Again, this leads me to believe that spatial analysis would be worthwhile. The histogram of state-level HDI also piqued my curiosity, as I wondered if the few states with lower HDI were the same few with greater forest cover.
+The initial methods employed were exploratory. First, I plotted the changes over time for both the national forest cover (in hectares) and the national HDI (according to the UN). As you can see, forests are steadily decreasing while HDI is steadily increasing. Once I calculated the percentage of forest cover per state (by using numbers from MapBiomas), I was also able to plot a histogram of forest cover. This shows that the majority of states are less forested but a few are incredibly forested. Again, this leads me to believe that spatial analysis would be worthwhile. The histogram of state-level HDI also piqued my curiosity, as I wondered if the few states with lower HDI were the same few with greater forest cover.
 
 <div class="flourish-embed" data-src="story/837076"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
 
