@@ -17,7 +17,7 @@ As applied to this research, a variable could be used to consider how much of a 
 
 ## Remote Sensing
 
-Other studies of land use and forest degredqation have considered remote sensing (Delgado-Aguilar et al, 2019; Sánchez-Azofeifa et al., 2017). Not only does this allow for a more comprehensive dataset that relies on measurements from satellite images rather than calculated estimates from official sources, but the data can have a better temporal resolution. For the purposes of my study, it seems that remote sensing data would allow for a more robust study of the patterns of forest loss and urban growth beyond numbers in a spreadsheet.
+Other studies of land use and forest degredation have considered remote sensing (Delgado-Aguilar et al, 2019; Sánchez-Azofeifa et al., 2017). Not only does this allow for a more comprehensive dataset that relies on measurements from satellite images rather than calculated estimates from official sources, but the data can have a better temporal resolution. For the purposes of my study, it seems that remote sensing data would allow for a more robust study of the patterns of forest loss and urban growth beyond numbers in a spreadsheet.
 
 ## Other Biomes
 
